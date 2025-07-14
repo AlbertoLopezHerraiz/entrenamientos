@@ -1,3 +1,5 @@
+package bolas;
+
 import javax.swing.*;
 import javax.swing.Timer;
 import java.awt.*;
@@ -172,17 +174,4 @@ public class BolasColoresAleatorias extends JPanel {
         }
     }
 
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            JFrame frame = new JFrame("Bolas de colores aleatorias");
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.setUndecorated(true);
-            frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-
-            BolasColoresAleatorias panel = new BolasColoresAleatorias(frame);
-            frame.setContentPane(panel);
-            frame.setVisible(true);
-        });
-    }
 }
