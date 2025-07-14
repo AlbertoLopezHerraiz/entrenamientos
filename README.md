@@ -1,8 +1,5 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>My First Webpage</title>
-</head>
     <body>
         <h1>APLICACIONES PERSONALES PARA EL ENTRENAMIENTOS</h1>
         <p>Esta aplicación está generada para el uso personal y el entrenamiento en particular de porteros de hockey 
