@@ -1,11 +1,10 @@
-package bolas;
+package juegos;
 
 import javax.swing.*;
 import javax.swing.Timer;
 import java.awt.*;
 import java.util.*;
 import java.util.List;
-
 
 public class BolasColoresAleatorias extends JPanel {
     private List<Color> colores;
@@ -17,10 +16,14 @@ public class BolasColoresAleatorias extends JPanel {
     private int cuentaAtras = -1;
     private int intervaloMs = 3000;
 
+    private JFrame frame;
+
     public BolasColoresAleatorias(JFrame frame) {
+        this.frame = frame;
         colores = new ArrayList<>();
         pedirIntervalo();
     }
+
 
     private void pedirIntervalo() {
         SwingUtilities.invokeLater(() -> {
@@ -32,7 +35,10 @@ public class BolasColoresAleatorias extends JPanel {
                         JOptionPane.QUESTION_MESSAGE
                 );
 
-                if (repInput == null) System.exit(0);
+                if (repInput == null) {
+                    volverAlMenu();
+                    return;
+                }
 
                 try {
                     repeticionesTotales = Integer.parseInt(repInput);
@@ -53,7 +59,8 @@ public class BolasColoresAleatorias extends JPanel {
             );
 
             if (input == null) {
-                System.exit(0);
+                volverAlMenu();
+                return;
             }
 
             try {
@@ -75,6 +82,17 @@ public class BolasColoresAleatorias extends JPanel {
         });
     }
 
+    private void volverAlMenu() {
+        // Cierra esta ventana y vuelve a mostrar el menú
+        if (cambioTimer != null && cambioTimer.isRunning()) {
+            cambioTimer.stop();
+        }
+        if (cuentaAtrasTimer != null && cuentaAtrasTimer.isRunning()) {
+            cuentaAtrasTimer.stop();
+        }
+        frame.dispose();
+        ElegirJuego.main(null);
+    }
 
     private void iniciarTimer() {
         mezclarColores();
@@ -126,7 +144,6 @@ public class BolasColoresAleatorias extends JPanel {
         preCuenta.start();
     }
 
-
     private void mezclarColores() {
         colores = Arrays.asList(Color.BLUE, Color.RED, Color.WHITE, Color.YELLOW);
         Collections.shuffle(colores);
@@ -155,12 +172,12 @@ public class BolasColoresAleatorias extends JPanel {
             g.drawOval(x, y, maxDiametro, maxDiametro);
             x += maxDiametro + espacioEntre;
         }
-        g.setFont(new Font("Arial", Font.BOLD, maxDiametro/4));
+        g.setFont(new Font("Arial", Font.BOLD, maxDiametro / 4));
         if (repeticionesRestantes == 1) {
-            if(repeticionesTotales>=4) g.setColor(Color.orange);
-            g.drawString("¡ÚLTIMA RONDA, ÁNIMO! ", (width) / 4, (height +g.getFontMetrics().getAscent()) / 4);
+            if (repeticionesTotales >= 4) g.setColor(Color.orange);
+            g.drawString("¡ÚLTIMA RONDA, ÁNIMO! ", (width) / 4, (height + g.getFontMetrics().getAscent()) / 4);
 
-        } else g.drawString("Rondas restantes: " + (repeticionesRestantes - 1), (width) / 4, ((height + g.getFontMetrics().getAscent()-15) / 4));
+        } else g.drawString("Rondas restantes: " + (repeticionesRestantes - 1), (width) / 4, ((height + g.getFontMetrics().getAscent() - 15) / 4));
         if (cuentaAtras >= 1) {
             g.setColor(Color.BLACK);
             g.setFont(new Font("Arial", Font.BOLD, maxDiametro));
@@ -173,5 +190,4 @@ public class BolasColoresAleatorias extends JPanel {
 
         }
     }
-
 }
