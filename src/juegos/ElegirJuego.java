@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.net.URI;
+import java.util.Objects;
 
 public class ElegirJuego {
     public static void elegirJuego() {
@@ -26,7 +27,7 @@ public class ElegirJuego {
             labelTexto.setFont(new Font("Arial", Font.PLAIN, 30));
 
 
-            ImageIcon logoOriginal = new ImageIcon(ElegirJuego.class.getResource("/resources/logo-el-casar.png"));
+            ImageIcon logoOriginal = new ImageIcon(Objects.requireNonNull(ElegirJuego.class.getResource("/resources/logo-el-casar.png")));
             Image imgRedimensionada = logoOriginal.getImage().getScaledInstance(75, 75, Image.SCALE_SMOOTH);
             ImageIcon logoEscalado = new ImageIcon(imgRedimensionada);
 
